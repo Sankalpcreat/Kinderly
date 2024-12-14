@@ -1,0 +1,19 @@
+
+.dashboard-container {
+    @apply p-6 bg-white rounded-lg shadow-lg;
+  }
+  
+  
+  .sidebar {
+    @apply w-64 bg-gray-800 text-white h-full;
+  }
+  
+  .sidebar-item {
+    @apply px-4 py-2 hover:bg-gray-700 cursor-pointer;
+  }
+  
+  
+  .dashboard-header {
+    @apply flex items-center justify-between bg-gray-100 px-6 py-4 shadow-md;
+  }
+  

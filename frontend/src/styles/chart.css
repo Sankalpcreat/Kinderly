@@ -1,0 +1,18 @@
+
+.chart-container {
+    @apply p-4 bg-white rounded-lg shadow-md;
+  }
+  
+ 
+  .chart-legend {
+    @apply flex flex-wrap items-center justify-center mt-4;
+  }
+  
+  .chart-legend-item {
+    @apply flex items-center mx-2 text-sm;
+  }
+  
+  .chart-legend-color {
+    @apply w-4 h-4 rounded mr-2;
+  }
+  
