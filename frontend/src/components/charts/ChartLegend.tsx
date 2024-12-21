@@ -1,16 +1,53 @@
 import React from "react";
 
-const ChartLegend = () => (
-  <div className="flex justify-center space-x-4 mt-4">
-    <div className="flex items-center space-x-2">
-      <div className="w-4 h-4 bg-green-500"></div>
-      <span>Completed</span>
+interface LegendItem {
+  label: string;
+  color: string;
+  shape?: "circle" | "square";
+}
+
+interface ChartLegendProps {
+  items: LegendItem[];
+  layout?: "horizontal" | "vertical";
+  textSize?: "sm" | "md" | "lg";
+  textColor?: string;
+  className?: string;
+  itemClassName?: string
+}
+
+const ChartLegend: React.FC<ChartLegendProps> = ({
+  items,
+  layout = "horizontal",
+  textSize = "md",
+  textColor = "text-gray-700",
+  className,
+  itemClassName
+}) => {
+    const layoutClasses = {
+        horizontal: "flex justify-center space-x-4",
+        vertical: "flex flex-col space-y-2 items-center"
+    }
+  const textSizeClasses = {
+    sm: "text-sm",
+    md: "text-base",
+    lg: "text-lg",
+  };
+
+  return (
+    <div className={`${layoutClasses[layout]} mt-4 ${className ? className : ""}`} aria-label="Chart Legend">
+      {items.map((item, index) => (
+        <div
+            key={index}
+            className={`flex items-center space-x-2 ${itemClassName ? itemClassName : ""}`}
+            >
+            <div
+            className={`w-4 h-4 ${item.shape === "circle" ? "rounded-full" : ""}  bg-${item.color}`}
+          ></div>
+          <span className={`${textSizeClasses[textSize]} ${textColor}`}>{item.label}</span>
+        </div>
+      ))}
     </div>
-    <div className="flex items-center space-x-2">
-      <div className="w-4 h-4 bg-orange-500"></div>
-      <span>Pending</span>
-    </div>
-  </div>
-);
+  );
+};
 
 export default ChartLegend;

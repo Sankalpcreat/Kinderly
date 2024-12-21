@@ -1,34 +1,64 @@
 import React, { useState } from "react";
 import useMilestoneStore from "../../stores/milestoneStore";
+import { TextInput } from "@/components/ui/TextInput";
+import { PrimaryButton } from "@/components/ui/PrimaryButton";
 
 const MilestoneForm = () => {
   const { addMilestone } = useMilestoneStore();
   const [milestone, setMilestone] = useState({ title: "", date: "" });
+   const [error, setError] = useState("");
+    const [loading, setLoading] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    addMilestone({ id: Date.now(), ...milestone });
-    setMilestone({ title: "", date: "" });
+    setError("");
+      setLoading(true);
+      if (!milestone.title) {
+          setError("Title is required.");
+           setLoading(false);
+          return;
+      }
+      if (!milestone.date) {
+          setError("Date is required");
+          setLoading(false);
+        return;
+      }
+      try {
+            await new Promise(resolve => setTimeout(resolve, 1000)); //Simulate loading
+            addMilestone({ id: Date.now(), ...milestone });
+            setMilestone({ title: "", date: "" });
+        } catch (err ) {
+          setError(err?.message || "An error occurred");
+      } finally {
+        setLoading(false);
+    }
   };
 
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
-      <input
-        type="text"
-        placeholder="Milestone Title"
-        value={milestone.title}
-        onChange={(e) => setMilestone({ ...milestone, title: e.target.value })}
-        className="border px-4 py-2 w-full"
-      />
-      <input
-        type="date"
-        value={milestone.date}
-        onChange={(e) => setMilestone({ ...milestone, date: e.target.value })}
-        className="border px-4 py-2 w-full"
-      />
-      <button type="submit" className="bg-blue-500 text-white px-4 py-2">
-        Add Milestone
-      </button>
+        <TextInput
+            label="Milestone Title"
+            value={milestone.title}
+            onChange={(value)=> setMilestone({...milestone, title:value})}
+            error={error.includes("Title")}
+        />
+         <TextInput
+            label="Milestone Date"
+            type="date"
+             value={milestone.date}
+            onChange={(value)=> setMilestone({...milestone, date:value})}
+             error={error.includes("Date")}
+         />
+
+        {error && (
+            <div className="text-red-500 text-sm">{error}</div>
+        )}
+          <PrimaryButton
+              type="submit"
+            label="Add Milestone"
+             loading={loading}
+             disabled={loading}
+         />
     </form>
   );
 };
