@@ -1,34 +1,40 @@
 import React from "react";
-import Link from "next/Link"; 
+import Link from "next/link";
 import useAuthStore from "../../stores/authStore";
+import NavbarItem from "@/components/navbar/NavbarItem";
+import MobileNav from "@/components/navbar/MobileNav";
 
 const Navbar = () => {
   const { user, logout } = useAuthStore();
 
   return (
-    <nav className="bg-gray-800 text-white p-4">
-      <div className="container mx-auto flex justify-between items-center">
+    <header className="bg-gray-800 text-white">
+      <nav className="container mx-auto flex justify-between items-center p-4">
+        {/* Brand Section */}
         <div>
-          <Link href="/" className="text-xl font-bold">
+          <Link href="/" className="text-2xl font-bold hover:text-gray-300 transition">
             AppName
           </Link>
         </div>
-        <div className="flex space-x-4">
+
+        {/* Desktop Navigation */}
+        <div className="hidden md:flex space-x-6">
+          <NavbarItem label="Home" href="/" />
+          <NavbarItem label="Dashboard" href="/dashboard" />
           {user ? (
             <>
-              <span>Welcome, {user}</span>
-              <button onClick={logout} className="text-red-500">
-                Logout
-              </button>
+              <NavbarItem label={`Welcome, ${user}`} />
+              <NavbarItem label="Logout" onClick={logout} />
             </>
           ) : (
-            <Link href="/auth/login" className="text-blue-500">
-              Login
-            </Link>
+            <NavbarItem label="Login" href="/auth/login" />
           )}
         </div>
-      </div>
-    </nav>
+
+        {/* Mobile Navigation */}
+        <MobileNav />
+      </nav>
+    </header>
   );
 };
 

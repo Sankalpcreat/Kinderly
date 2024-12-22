@@ -32,7 +32,7 @@ const PrimaryButton: React.FC<PrimaryButtonProps> = ({
       "bg-secondary-500 hover:bg-secondary-700 focus:ring-secondary-300 text-white",
     danger:
       "bg-red-500 hover:bg-red-700 focus:ring-red-300 text-white",
-      gray: "bg-gray-400 hover:bg-gray-500 focus:ring-gray-300 text-white",
+    gray: "bg-gray-400 hover:bg-gray-500 focus:ring-gray-300 text-white",
   };
 
   const sizeClasses = {
@@ -41,22 +41,30 @@ const PrimaryButton: React.FC<PrimaryButtonProps> = ({
     lg: "px-5 py-3 text-lg",
   };
 
+  const buttonClasses = `${colorClasses[color] || colorClasses.primary} ${
+    sizeClasses[size] || sizeClasses.md
+  } rounded-md shadow-sm focus:outline-none focus:ring-2 transition-colors duration-200 
+    disabled:opacity-50 disabled:cursor-not-allowed ${className || ""} flex items-center justify-center`;
 
   return (
     <button
       onClick={onClick}
       type={type}
       disabled={disabled || loading}
-      className={`${colorClasses[color]} ${sizeClasses[size]}  rounded-md shadow-sm focus:outline-none focus:ring-2  transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed ${className ? className : ""} flex items-center justify-center`}
+      className={buttonClasses}
       aria-disabled={disabled}
+      aria-busy={loading}
     >
-        {icon && iconPosition === "left" && <span className="mr-2">{icon}</span>}
-          {loading ? (
-               <div className="animate-spin rounded-full h-4 w-4 border-t-2 border-b-2 border-white"></div>
-          ) : (
-              <span>{label}</span>
-          )}
-          {icon && iconPosition === "right" && <span className="ml-2">{icon}</span>}
+      {icon && iconPosition === "left" && <span className="mr-2">{icon}</span>}
+      {loading ? (
+        <div
+          className="animate-spin rounded-full h-4 w-4 border-t-2 border-b-2 border-white"
+          aria-label="Loading"
+        ></div>
+      ) : (
+        <span>{label}</span>
+      )}
+      {icon && iconPosition === "right" && <span className="ml-2">{icon}</span>}
     </button>
   );
 };
