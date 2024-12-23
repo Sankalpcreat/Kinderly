@@ -1,3 +1,4 @@
+"use client"
 import React from "react";
 import MilestoneChart from "@/components/charts/MilestoneChart";
 import ProgressChart from "@/components/charts/ProgressChart";

@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import Sidebar from "@/components/layout/Sidebar";
 import ContentWrapper from "@/components/layout/ContentWrapper";

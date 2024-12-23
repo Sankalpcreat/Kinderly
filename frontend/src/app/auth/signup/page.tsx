@@ -1,3 +1,4 @@
+"use client"
 import React from "react";
 import AuthForm from "@/components/forms/AuthForm";
 import { useRouter } from "next/router";

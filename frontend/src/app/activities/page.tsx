@@ -1,3 +1,4 @@
+"use client"
 import React, { useState, useEffect } from "react";
 import useActivityStore from "@/stores/activityStore";
 import { activitiesService } from "@/services/activities";

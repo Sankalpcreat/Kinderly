@@ -1,3 +1,4 @@
+"use client"
 import React, { useEffect } from "react";
 import MilestoneForm from "@/components/forms/MilestoneForm";
 import MilestoneChart from "@/components/charts/MilestoneChart";
