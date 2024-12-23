@@ -1,7 +1,7 @@
 "use client"
 import React from "react";
 import Link from "next/link";
-import { useAuthStore } from "@/stores/authStore";
+import  useAuthStore  from "@/stores/authStore";
 import useThemeStore from "@/stores/themeStore";
 import {
   HomeIcon,
@@ -10,7 +10,9 @@ import {
   LogoutIcon,
   MoonIcon,
   SunIcon,
-} from "@heroicons/react/outline"; // Example icons from Heroicons
+} from "@heroicons/react/24/outline";// Example icons from Heroicons
+
+
 
 interface NavItem {
   label: string;
