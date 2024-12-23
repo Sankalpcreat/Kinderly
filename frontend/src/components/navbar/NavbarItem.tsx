@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import Link from "next/link";
 
@@ -22,13 +24,8 @@ const NavbarItem: React.FC<NavbarItemProps> = ({ label, href, onClick }) => {
 
   if (href) {
     return (
-      <Link href={href} passHref>
-        <a
-          className="px-4 py-2 hover:bg-gray-700 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 transition"
-          aria-label={label}
-        >
-          {label}
-        </a>
+      <Link href={href} className="px-4 py-2 hover:bg-gray-700 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 transition">
+        {label}
       </Link>
     );
   }

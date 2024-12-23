@@ -1,8 +1,10 @@
+"use client";
+
 import React, { ReactNode } from "react";
 
 interface PrimaryButtonProps {
-  label: string;
-  onClick: () => void;
+  label?: string;
+  onClick?: () => void;
   color?: "primary" | "secondary" | "danger" | "gray";
   size?: "sm" | "md" | "lg";
   loading?: boolean;
@@ -26,12 +28,9 @@ const PrimaryButton: React.FC<PrimaryButtonProps> = ({
   className,
 }) => {
   const colorClasses = {
-    primary:
-      "bg-primary-500 hover:bg-primary-700 focus:ring-primary-300 text-white",
-    secondary:
-      "bg-secondary-500 hover:bg-secondary-700 focus:ring-secondary-300 text-white",
-    danger:
-      "bg-red-500 hover:bg-red-700 focus:ring-red-300 text-white",
+    primary: "bg-primary-500 hover:bg-primary-700 focus:ring-primary-300 text-white",
+    secondary: "bg-secondary-500 hover:bg-secondary-700 focus:ring-secondary-300 text-white",
+    danger: "bg-red-500 hover:bg-red-700 focus:ring-red-300 text-white",
     gray: "bg-gray-400 hover:bg-gray-500 focus:ring-gray-300 text-white",
   };
 
@@ -54,6 +53,7 @@ const PrimaryButton: React.FC<PrimaryButtonProps> = ({
       className={buttonClasses}
       aria-disabled={disabled}
       aria-busy={loading}
+      aria-label={label || "Primary Button"}
     >
       {icon && iconPosition === "left" && <span className="mr-2">{icon}</span>}
       {loading ? (
@@ -62,7 +62,7 @@ const PrimaryButton: React.FC<PrimaryButtonProps> = ({
           aria-label="Loading"
         ></div>
       ) : (
-        <span>{label}</span>
+        label && <span>{label}</span>
       )}
       {icon && iconPosition === "right" && <span className="ml-2">{icon}</span>}
     </button>

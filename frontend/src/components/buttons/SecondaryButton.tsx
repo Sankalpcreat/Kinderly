@@ -1,8 +1,10 @@
+"use client";
+
 import React, { ReactNode } from "react";
 
 interface SecondaryButtonProps {
-  label: string;
-  onClick: () => void;
+  label?: string;
+  onClick?: () => void;
   color?: "default" | "contrast" | "gray";
   size?: "sm" | "md" | "lg";
   loading?: boolean;
@@ -26,10 +28,8 @@ const SecondaryButton: React.FC<SecondaryButtonProps> = ({
   className,
 }) => {
   const colorClasses = {
-    default:
-      "bg-gray-100 hover:bg-gray-200 focus:ring-gray-300 text-gray-700 border border-gray-300",
-    contrast:
-      "bg-white hover:bg-gray-50 focus:ring-gray-300 text-gray-800 border border-gray-300",
+    default: "bg-gray-100 hover:bg-gray-200 focus:ring-gray-300 text-gray-700 border border-gray-300",
+    contrast: "bg-white hover:bg-gray-50 focus:ring-gray-300 text-gray-800 border border-gray-300",
     gray: "bg-gray-200 hover:bg-gray-300 focus:ring-gray-300 text-gray-800 border border-gray-300",
   };
 
@@ -41,9 +41,8 @@ const SecondaryButton: React.FC<SecondaryButtonProps> = ({
 
   const buttonClasses = `${colorClasses[color] || colorClasses.default} ${
     sizeClasses[size] || sizeClasses.md
-  } rounded-md shadow-sm focus:outline-none focus:ring-2 transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed ${
-    className || ""
-  } flex items-center justify-center`;
+  } rounded-md shadow-sm focus:outline-none focus:ring-2 transition-colors duration-200 
+    disabled:opacity-50 disabled:cursor-not-allowed ${className || ""} flex items-center justify-center`;
 
   return (
     <button
@@ -53,6 +52,7 @@ const SecondaryButton: React.FC<SecondaryButtonProps> = ({
       className={buttonClasses}
       aria-disabled={disabled}
       aria-busy={loading}
+      aria-label={label || "Secondary Button"}
     >
       {icon && iconPosition === "left" && <span className="mr-2">{icon}</span>}
       {loading ? (
@@ -61,7 +61,7 @@ const SecondaryButton: React.FC<SecondaryButtonProps> = ({
           aria-label="Loading"
         ></div>
       ) : (
-        <span>{label}</span>
+        label && <span>{label}</span>
       )}
       {icon && iconPosition === "right" && <span className="ml-2">{icon}</span>}
     </button>
