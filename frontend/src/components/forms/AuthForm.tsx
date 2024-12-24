@@ -61,78 +61,71 @@ const AuthForm: React.FC<AuthFormProps> = ({ type, onSuccess }) => {
   };
 
   return (
-    <form
-      onSubmit={handleSubmit}
-      className="space-y-6 bg-white p-8 rounded-lg shadow-md max-w-lg mx-auto"
-    >
-      <h2 className="text-2xl font-semibold text-center text-gray-800">
-        {type === "login" ? "Welcome Back!" : "Create Your Account"}
-      </h2>
-
-      <TextInput
-        label="Username"
-        value={username}
-        onChange={setUsername}
-        placeholder="Enter your username"
-        error={error.includes("Username")}
-      />
-
-      <TextInput
-        label="Password"
-        type="password"
-        value={password}
-        onChange={setPassword}
-        placeholder="Enter your password"
-        error={error.includes("Password")}
-      />
-
-      {type === "signup" && (
+    <div className="max-w-md mx-auto p-6 bg-white rounded-lg shadow-md sm:p-8">
+      <form onSubmit={handleSubmit} className="space-y-6">
         <TextInput
-          label="Confirm Password"
-          type="password"
-          value={confirmPassword}
-          onChange={setConfirmPassword}
-          placeholder="Confirm your password"
-          error={error.includes("match")}
+          label="Username"
+          value={username}
+          onChange={setUsername}
+          placeholder="Enter your username"
+          aria-label="Username"
+          className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+          error={error.includes("Username")}
         />
-      )}
 
-      {error && (
-        <div className="text-red-500 text-sm text-center">{error}</div>
-      )}
+        <TextInput
+          label="Password"
+          type="password"
+          value={password}
+          onChange={setPassword}
+          placeholder="Enter your password"
+          aria-label="Password"
+          className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+          error={error.includes("Password")}
+        />
 
-      <PrimaryButton
-        type="submit"
-        label={type === "login" ? "Login" : "Sign Up"}
-        loading={loading}
-        disabled={loading}
-        className="w-full"
-      />
+        {type === "signup" && (
+          <TextInput
+            label="Confirm Password"
+            type="password"
+            value={confirmPassword}
+            onChange={setConfirmPassword}
+            placeholder="Confirm your password"
+            aria-label="Confirm Password"
+            className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            error={error.includes("match")}
+          />
+        )}
 
-      {type === "signup" && (
-        <p className="text-sm text-gray-600 text-center">
-          Already have an account?{" "}
-          <a
-            href="/auth/login"
-            className="text-indigo-500 hover:underline font-medium"
-          >
-            Log in
-          </a>
-        </p>
-      )}
+        {error && (
+          <div className="flex items-center text-red-500 text-sm">
+            <svg
+              className="w-4 h-4 mr-2"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M18.364 5.636l-12.728 12.728M5.636 5.636l12.728 12.728"
+              ></path>
+            </svg>
+            {error}
+          </div>
+        )}
 
-      {type === "login" && (
-        <p className="text-sm text-gray-600 text-center">
-          Don’t have an account?{" "}
-          <a
-            href="/auth/signup"
-            className="text-indigo-500 hover:underline font-medium"
-          >
-            Sign up
-          </a>
-        </p>
-      )}
-    </form>
+        <PrimaryButton
+          type="submit"
+          label={type === "login" ? "Login" : "Sign Up"}
+          loading={loading}
+          disabled={loading}
+          className="w-full py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+        />
+      </form>
+    </div>
   );
 };
 
