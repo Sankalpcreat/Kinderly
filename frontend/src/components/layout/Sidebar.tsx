@@ -1,18 +1,16 @@
 "use client"
 import React from "react";
 import Link from "next/link";
-import  useAuthStore  from "@/stores/authStore";
+import useAuthStore from "@/stores/authStore";
 import useThemeStore from "@/stores/themeStore";
 import {
   HomeIcon,
   FlagIcon,
   BookOpenIcon,
-  LogoutIcon,
+  ArrowRightIcon,
   MoonIcon,
   SunIcon,
-} from "@heroicons/react/24/outline";// Example icons from Heroicons
-
-
+} from "@heroicons/react/24/outline";
 
 interface NavItem {
   label: string;
@@ -54,7 +52,7 @@ const Sidebar: React.FC = () => {
         <button
           onClick={toggleTheme}
           aria-label="Toggle Theme"
-          className={`p-2 rounded-md ${hoverClass} focus:outline-none focus:ring-2 focus:ring-primary-500`}
+          className={`p-2 rounded-md ${hoverClass} focus:outline-none focus:ring-2 focus:ring-blue-500`}
         >
           {themeIcon}
         </button>
@@ -64,7 +62,7 @@ const Sidebar: React.FC = () => {
       {user && (
         <div className={`p-4 border-b ${theme === "light" ? "border-gray-300" : "border-gray-700"}`}>
           <p className="font-medium">
-            Welcome, <span className="text-primary-400">{user.name}</span>
+            Welcome, <span className="text-blue-500">{user.name}</span>
           </p>
         </div>
       )}
@@ -76,7 +74,7 @@ const Sidebar: React.FC = () => {
             <li key={item.label} className="mb-1">
               <Link
                 href={item.href}
-                className={`flex items-center px-4 py-2 rounded-md ${hoverClass} focus:outline-none focus:bg-primary-500`}
+                className={`flex items-center px-4 py-2 rounded-md ${hoverClass} focus:outline-none focus:ring-2 focus:ring-blue-500`}
                 aria-label={item.label}
               >
                 <span className="mr-2">{item.icon}</span> {item.label}
@@ -90,10 +88,10 @@ const Sidebar: React.FC = () => {
       {user && (
         <div className="p-4">
           <button
-            className={`flex items-center w-full px-4 py-2 rounded-md ${hoverClass} focus:outline-none focus:ring-2 focus:ring-primary-500`}
+            className={`flex items-center w-full px-4 py-2 rounded-md ${hoverClass} focus:outline-none focus:ring-2 focus:ring-blue-500`}
             onClick={handleLogout}
           >
-            <LogoutIcon className="h-5 w-5 mr-2" />
+            <ArrowRightIcon className="h-5 w-5 mr-2" />
             Logout
           </button>
         </div>
